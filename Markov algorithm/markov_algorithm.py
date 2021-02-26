@@ -32,16 +32,20 @@ def rule(string, scheme):
 
 
 
-def algorithm(string, scheme, print_steps):
+def algorithm(string, scheme, steps):
 	rules_applied = True
 	res = (string, True)
+	out_str_l = list()
+	out_str_l.append(string)
 	while rules_applied:
 		for i in range(scheme.__len__()):
 			res = rule(res[0], scheme[i])
 			if res[1]:
 				rules_applied = True
-				if print_steps:
-					print(res[0])
+				if steps:
+					out_str_l.append(res[0])
 				break
 			rules_applied = False	
-	return res[0]
+	if not steps:
+		out_str_l.append(res[0])
+	return out_str_l

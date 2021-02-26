@@ -22,6 +22,9 @@
 
 
 
+# Example of Markov algorithm for binary to unary conversion. 
+# The scheme is taken from https://en.wikipedia.org/wiki/Markov_algorithm
+
 
 import markov_algorithm
 import sys
@@ -36,9 +39,10 @@ scheme = (	('|0', '0||'),
 	
 def main():
 	initial_str = sys.argv[1]
-	print(initial_str)
-	final_str = markov_algorithm.algorithm(initial_str, scheme, False)
-	print(final_str)
+	final_l = markov_algorithm.algorithm(initial_str, scheme, True)
+	print('Markov algorithm operation steps results:')
+	print(final_l)
+	
 	
 	
 main()
