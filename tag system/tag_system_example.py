@@ -22,8 +22,8 @@
 
 
 
-# Example of simple 2-tag system which computes modified version of Collatz 
-# sequence. Tag system production rules are taken from 
+# Example of simple 2-tag system. 
+# Tag system production rules are taken from 
 # https://en.wikipedia.org/wiki/Tag_system 
 
 
@@ -33,33 +33,23 @@ import re
 
 
 
-productions = (	('a', 'bc'),
-				('b', 'a'),
-				('c', 'aaa'))
+productions = (	('a', 'bb'),
+				('b', 'abH'))
 
 
 
 def halt(word):
-	if word.__len__() < 2:
+	if word[0] == 'H':
 		return True
 	return False		
 	
 	
 	
 def main():
-	initial_num = int(sys.argv[1])	
-	initial_word = 'a' * initial_num
+	initial_word = 'ba'
 	out_l = tag_system.process(initial_word, productions, 2, halt, True)
 	print('Tag system operation steps results:')
 	print(out_l)
-	collatz_seq = list()
-	for i in range(out_l.__len__()):
-		res = re.fullmatch('a+', out_l[i])
-		if res:
-			collatz_seq.append(res[0].__len__())
-	print()
-	print(f'Modified version of the Collatz sequence for {initial_num} is') 
-	print(collatz_seq)
 	
 	
 	

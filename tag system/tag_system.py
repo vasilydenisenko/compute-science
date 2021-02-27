@@ -23,25 +23,26 @@
 
 
 
-def rule(string, production, m):
-	out_str = string
-	if production[0] == out_str[0]:
-		out_str = string[m:]
-		out_str += production[1]
-	return out_str
+def rule(word, production, m):
+	if production[0] == word[0]:
+		out_word = word[m:] + production[1]
+		return (out_word, True)
+	out_word = word
+	return (out_word, False)
 				
 				
 				
-def process(string, productions, m, halt, steps):
-	out_str = string
-	out_str_l = list()
-	out_str_l.append(out_str)
-	while not halt(out_str):
+def process(word, productions, m, halt, steps):
+	rules_applied = True
+	res = (word, True)
+	word_l = list()
+	word_l.append(word)
+	while not halt(res[0]):
 		for i in range(productions.__len__()):
-			if productions[i][0] == out_str[0]:
-				out_str = rule(out_str, productions[i], m)
-				if steps:
-					out_str_l.append(out_str)
+			res = rule(res[0], productions[i], m)
+			rules_applied = res[1]
+			if steps and rules_applied:
+				word_l.append(res[0])
 	if not steps:
-		out_str_l.append(out_str)
-	return out_str_l
+		word_l.append(res[0])
+	return word_l
